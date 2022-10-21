@@ -4,14 +4,18 @@ const mongoose = require('mongoose');
 require('dotenv/config');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const exceptionHandler = require("./Utils/ExceptionHandler/exceptionHandler");
 
-//Midleweare
+//Middleware
 app.use(bodyParser.json());
 app.use(cors());
 
 //Routs
 userRoute = require('./Routes/userRoute');
 app.use('/user', userRoute);
+
+//Exception handle middleware
+app.use(exceptionHandler);
 
 //MongoDB connection
 mongoose.connect(process.env.ATLAS_URI, () => {
