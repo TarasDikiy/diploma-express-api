@@ -38,11 +38,11 @@ router.get('/getByEmail/:userEmail', tryCatch(async (req, res) => {
 
 /* #region //~UPDATE */
 router.patch("/updateByEmail/:userEmail", tryCatch(async (req, res) => {
-    const updatedUser = await User.replaceOne({ email: req.params.userEmail }, req.body);
-    //Handle exceptions
-    if (updatedUser.modifiedCount === 0) throw new CustomException(404, `No records was found by email ${req.params.userEmail}`);
+    const updatedUser = await User.findOneAndUpdate({ email: req.params.userEmail }, req.body, {new: true, runValidators: true, rawResult: true});
+    //Throwing exceptions
+    if (!updatedUser.lastErrorObject.updatedExisting) throw new CustomException(404, `No records was found by email ${req.params.userEmail}`);
     //Return result
-    res.json(updatedUser);
+    res.status(200).json(updatedUser);
 }));
 /* #endregion */
 

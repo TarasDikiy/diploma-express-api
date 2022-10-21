@@ -13,6 +13,8 @@ app.use(cors());
 //Routs
 userRoute = require('./Routes/userRoute');
 app.use('/user', userRoute);
+roleRoute = require('./Routes/roleRoute');
+app.use('/role', roleRoute);
 
 //Exception handle middleware
 app.use(exceptionHandler);
