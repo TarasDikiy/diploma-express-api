@@ -9,12 +9,15 @@ const exceptionHandler = require("./Utils/ExceptionHandler/exceptionHandler");
 //Middleware
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 
 //Routs
 userRoute = require('./Routes/userRoute');
 app.use('/user', userRoute);
 roleRoute = require('./Routes/roleRoute');
 app.use('/role', roleRoute);
+authRoute = require('./Routes/authRoute');
+app.use('/auth', authRoute);
 
 //Exception handle middleware
 app.use(exceptionHandler);
