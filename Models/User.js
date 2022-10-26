@@ -8,20 +8,12 @@ const UserSchema = mongoose.Schema({
         trim: true,
         minlength: 5
     },
-    name: {
-        type: String,
-        required: false,
-        default: ''
-    },
-    surname: {
-        type: String,
-        required: false,
-        default: ''
-    },
-    role: {
+    password: {
         type: String,
         required: true,
-        default: 'Guest'
+        trim: true,
+        minlength: 5,
+        maxLength: 1024
     }
 });
 
